@@ -1,0 +1,62 @@
+import { test, Page, expect } from '@playwright/test';
+
+test('test create', async ({ page }) => {
+  await page.goto('http://admin-app-stg.eba-mjccpvfc.eu-central-1.elasticbeanstalk.com/auth/login');
+  await page.getByPlaceholder('user@email').click();
+  await page.getByPlaceholder('user@email').fill('gerlie@old.st');
+  await page.getByPlaceholder('user@email').press('Tab');
+  await page.locator('input[type="password"]').fill('Password11@');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  //await page.goto('http://admin-app-stg.eba-mjccpvfc.eu-central-1.elasticbeanstalk.com/people');
+  await page.waitForTimeout(3000);
+  await page.getByText('Competencies').click();
+  await page.getByRole('button', { name: 'Add Competency' }).click();
+  await page.getByPlaceholder('Select language').click();
+  await page.getByText('English', { exact: true }).click();
+  await page.getByPlaceholder(' ', { exact: true }).first().click();
+  await page.getByPlaceholder(' ', { exact: true }).first().fill('testqa oct 16');
+  await page.getByPlaceholder('Select type').click();
+  await page.waitForTimeout(3000);
+  await page.locator('[id="\\34 "]').click();
+  await page.getByPlaceholder('Select dimension').click();
+  await page.locator('[id="\\34 4"]').click();
+  await page.locator('[id="accordion__panel-\\:r3\\:"]').getByPlaceholder(' ').fill('test');
+  await page.locator('[id="accordion__panel-\\:r3\\:"]').getByPlaceholder(' ').click();
+  await page.getByText('s test', { exact: true }).fill('sdfrrrsd');
+  await page.getByRole('button', { name: 'Level 5' }).click();
+  await page.locator('[id="accordion__panel-\\:r4\\:"]').getByPlaceholder(' ').fill('d');
+  await page.locator('[id="accordion__panel-\\:r4\\:"]').getByPlaceholder(' ').click();
+  await page.getByText('d', { exact: true }).fill('dfsd');
+  await page.getByRole('button', { name: 'Level 8' }).click();
+  await page.locator('[id="accordion__panel-\\:r5\\:"]').getByPlaceholder(' ').click();
+  await page.locator('[id="accordion__panel-\\:r5\\:"]').getByPlaceholder(' ').fill('dfs');
+  await page.getByRole('button', { name: 'Save and Close' }).click();
+  await page.getByPlaceholder(' ', { exact: true }).nth(1).fill('f');
+  await page.getByPlaceholder(' ', { exact: true }).nth(1).click();
+  await page.getByText('f', { exact: true }).fill('fsdf');
+  await page.locator('.pt-6 > .input_input__ysDtm > .input_input-wrapper__5Hxrn').first().click();
+  await page.getByPlaceholder(' ', { exact: true }).first().click();
+  await page.getByPlaceholder(' ', { exact: true }).first().fill('Oct 16');
+  await page.getByRole('button', { name: 'Save and Close' }).click();
+  await page.getByText('The competency has been successfully added.').click();
+});
+
+test('test update', async ({ page }) => {
+    await page.goto('http://admin-app-stg.eba-mjccpvfc.eu-central-1.elasticbeanstalk.com/auth/login');
+    await page.getByPlaceholder('user@email').click();
+    await page.getByPlaceholder('user@email').fill('gerlie@old.st');
+    await page.getByPlaceholder('user@email').press('Tab');
+    await page.locator('input[type="password"]').fill('Password11@');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.waitForTimeout(3000);
+    await page.locator('div').filter({ hasText: /^Competencies$/ }).click();
+    await page.getByPlaceholder('Search').click();
+    await page.getByPlaceholder('Search').fill('test');
+    await page.getByText('View', { exact: true }).click();
+    await page.getByPlaceholder(' ', { exact: true }).first().click();
+    await page.getByPlaceholder(' ', { exact: true }).first().click();
+    await page.waitForTimeout(2000);
+    await page.getByRole('button', { name: 'Save and Close' }).click();
+    await page.waitForTimeout(2000);
+    await page.getByText('The competency has been successfully edited.').click();
+})

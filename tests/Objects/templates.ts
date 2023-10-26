@@ -1,0 +1,32 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://admin-app-stg.eba-mjccpvfc.eu-central-1.elasticbeanstalk.com/auth/login');
+  await page.getByPlaceholder('user@email').click();
+  await page.getByPlaceholder('user@email').click();
+  await page.getByPlaceholder('user@email').fill('gerlie@old,st');
+  await page.getByPlaceholder('user@email').press('Tab');
+  await page.locator('input[type="password"]').fill('Password11@');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.locator('[id="__next"] svg').click();
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.getByPlaceholder('user@email').click();
+  await page.getByPlaceholder('user@email').press('ArrowLeft');
+  await page.getByPlaceholder('user@email').press('ArrowLeft');
+  await page.getByPlaceholder('user@email').fill('gerlie@old.st');
+  await page.getByPlaceholder('user@email').press('Enter');
+  await page.goto('http://admin-app-stg.eba-mjccpvfc.eu-central-1.elasticbeanstalk.com/people');
+  await page.getByText('Templates').click();
+  await page.getByRole('button', { name: 'Add Template' }).click();
+  await page.getByPlaceholder(' ').first().click();
+  await page.getByPlaceholder(' ').first().fill('test template oct 16');
+  await page.locator('textarea[type="text"]').click();
+  await page.locator('textarea[type="text"]').fill('test desfdsf');
+  await page.getByPlaceholder('Search competencies').click();
+  await page.getByText('Account planning').click();
+  await page.getByRole('button', { name: 'Add', exact: true }).click();
+  await page.getByRole('button', { name: 'Account planning 7/10' }).click();
+  await page.getByRole('button', { name: 'Account planning 7/10' }).click();
+  await page.getByRole('button', { name: 'Save and Close' }).click();
+  await page.getByText('Template has been successfully added.').click();
+});
